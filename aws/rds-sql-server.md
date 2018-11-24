@@ -2,7 +2,22 @@
 
 ## Tasks
 
-### Create backup to S3 bucket
+- [Take offline/online](#offline-online)
+- [Create backup to S3 bucket](#backup-to-s3)
+
+### Take offline/online<a name="offline-online"></a>
+
+```sql
+USE master
+
+-- Take offline
+ALTER DATABASE <db_name> SET OFFLINE
+
+-- Bring online
+EXEC rdsadmin.dbo.rds_set_database_online <db_name>
+```
+
+### Create backup to S3 bucket<a name="backup-to-s3"></a>
 
 First, enable backups:
 
