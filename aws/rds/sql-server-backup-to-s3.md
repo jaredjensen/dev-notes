@@ -1,21 +1,4 @@
-**Table of Contents**
-
-- [Take offline/online](#take-offlineonline)
-- [Create backup to S3 bucket](#create-backup-to-s3-bucket)
-
-# Take offline/online
-
-```sql
-USE master
-
--- Take offline
-ALTER DATABASE <db_name> SET OFFLINE
-
--- Bring online
-EXEC rdsadmin.dbo.rds_set_database_online <db_name>
-```
-
-# Create backup to S3 bucket
+# Create SQL Server Backup to S3
 
 First, enable backups:
 
@@ -23,6 +6,8 @@ First, enable backups:
 2. Enter SQL version information and create the group
 3. Select new group and choose **Add Option**
 4. Select `SQLSERVER_BACKUP_RESTORE`, create a new IAM role, select/create the S3 bucket, and apply immediately
+
+Next, take the database [offline](sql-server-online-offline.md).
 
 Now connect to the RDS server and create the backup:
 
@@ -37,7 +22,7 @@ exec msdb.dbo.rds_backup_database
 exec msdb.dbo.rds_task_status @db_name='<database_name>';
 ```
 
-See also:
+## References
 
 - [Importing and Exporting SQL Server Databases](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Procedural.Importing.html)
 - [How do I perform native backups of an RDS SQL Server DB instance?](https://aws.amazon.com/premiumsupport/knowledge-center/native-backup-rds-sql-server/)
