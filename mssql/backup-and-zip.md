@@ -151,6 +151,6 @@ PRINT ''
 
 Create a batch file to invoke the backup script and output to a log file.
 
-```bash
+```dos
 sqlcmd -S .\sqlexpress -i mssql.sql -o mssql.log
 ```
